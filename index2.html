@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spiegazione del Codice PHP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    code {
+      background-color: #f0f0f0;
+      padding: 5px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Spiegazione del Codice PHP</h1>
+
+<p>Il seguente codice PHP gestisce l'inserimento di informazioni su libri in un file di testo.</p>
+
+<code>
+<?php
+echo "libro inserito correttamente";
+
+// Definizione del percorso del file
+$percorso = 'libri1.txt';
+
+// Controlla se il file esiste
+if (file_exists($percorso)) {
+    // Se il file esiste, legge il contenuto e deserializza i dati
+    $existing_data = file_get_contents($percorso);
+    $libri = unserialize($existing_data);
+} else {
+    // Se il file non esiste, inizializza un nuovo array
+    $libri = [];
+}
+
+// Ottiene i dati dai parametri GET
+$titolo = $_GET['titolo'];
+$autore = $_GET['autore'];
+$mail = $_GET['mail'];
+
+// Aggiunge il nuovo libro all'array
+$libri[] = array('titolo' => $titolo, 'autore' => $autore , 'mail' => $mail);
+
+// Serializza i dati
+$data = serialize($libri);
+
+// Scrive i dati nel file
+file_put_contents($percorso , $data );
+?>
+</code>
+
+<p><strong>Spiegazione:</strong></p>
+
+<ol>
+  <li><code>echo "libro inserito correttamente";</code>: Stampa un messaggio di conferma.</li>
+  <li><code>$percorso = 'libri1.txt';</code>: Definisce il percorso del file in cui verranno salvati i dati.</li>
+  <li><code>file_exists($percorso)</code>: Verifica se il file esiste.</li>
+  <li><code>file_get_contents($percorso)</code>: Legge il contenuto del file.</li>
+  <li><code>unserialize($existing_data)</code>: Deserializza i dati dal formato stringa al formato array.</li>
+  <li><code>$libri[] = array('titolo' => $titolo, 'autore' => $autore , 'mail' => $mail);</code>: Aggiunge il nuovo libro all'array <code>$libri</code>.</li>
+  <li><code>serialize($libri)</code>: Serializza l'array dei libri in formato stringa.</li>
+  <li><code>file_put_contents($percorso , $data );</code>: Scrive i dati serializzati nel file.</li>
+</ol>
+
+</body>
+</html>
