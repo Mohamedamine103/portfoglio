@@ -47,4 +47,26 @@ $mail = $_GET['mail'];
 // Aggiunge il nuovo libro all'array
 $libri[] = array('titolo' => $titolo, 'autore' => $autore , 'mail' => $mail);
 
-// Serializza i d
+// Serializza i dati
+$data = serialize($libri);
+
+// Scrive i dati nel file
+file_put_contents($percorso , $data );
+?>
+</code>
+
+<p><strong>Spiegazione:</strong></p>
+
+<ol>
+  <li><code>echo "libro inserito correttamente";</code>: Stampa un messaggio di conferma.</li>
+  <li><code>$percorso = 'libri1.txt';</code>: Definisce il percorso del file in cui verranno salvati i dati.</li>
+  <li><code>file_exists($percorso)</code>: Verifica se il file esiste.</li>
+  <li><code>file_get_contents($percorso)</code>: Legge il contenuto del file.</li>
+  <li><code>unserialize($existing_data)</code>: Deserializza i dati dal formato stringa al formato array.</li>
+  <li><code>$libri[] = array('titolo' => $titolo, 'autore' => $autore , 'mail' => $mail);</code>: Aggiunge il nuovo libro all'array <code>$libri</code>.</li>
+  <li><code>serialize($libri)</code>: Serializza l'array dei libri in formato stringa.</li>
+  <li><code>file_put_contents($percorso , $data );</code>: Scrive i dati serializzati nel file.</li>
+</ol>
+
+</body>
+</html>
